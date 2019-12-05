@@ -14,4 +14,4 @@ module AwesomeTooltip
   end
 end
 
-# AwesomeTooltip.load!
+AwesomeTooltip.load!
