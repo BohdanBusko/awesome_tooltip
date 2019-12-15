@@ -14,4 +14,6 @@ module AwesomeTooltip
   end
 end
 
+require 'awesome_tooltip/routes'
+
 AwesomeTooltip.load!

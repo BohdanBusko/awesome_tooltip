@@ -64,6 +64,7 @@ GEM
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2)
     builder (3.2.3)
+    coderay (1.1.2)
     concurrent-ruby (1.1.5)
     crass (1.0.5)
     erubi (1.9.0)
@@ -87,6 +88,9 @@ GEM
     nio4r (2.5.2)
     nokogiri (1.10.7)
       mini_portile2 (~> 2.4.0)
+    pry (0.12.2)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
     rack (2.0.7)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -153,6 +157,7 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_tooltip!
+  pry
   sqlite3
   turbolinks
 

@@ -19,11 +19,18 @@ function handleMouseLeave(element) {
 }
 
 function tooltipTemplate(element) {
+  fetchData();
   element.insertAdjacentHTML('beforeend', `
     <div class="awesome-tooltip top">
       <div class="awesome-tooltip-text">${element.dataset.awesomeTooltip}</div>
     </div>
   `);
+}
+
+function fetchData() {
+  fetch('http://localhost:3000/awesome_tooltip/hello_world.json')
+    .then(function(response) { return response.json(); })
+    .then(function(data) { console.log(JSON.stringify(data)['html']) });
 }
 
 document.addEventListener(loadType, function() {
@@ -35,6 +42,4 @@ document.addEventListener(loadType, function() {
     handleMouseEnter(element);
     handleMouseLeave(element);
   });
-
-  console.log(AwesomeTooltip.styles);
 });
