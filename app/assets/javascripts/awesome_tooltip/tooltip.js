@@ -8,7 +8,7 @@ if(typeof(Turbolinks) !== undefined) {
 
 function handleMouseEnter(element) {
   element.addEventListener('mouseenter', function(e) {
-    tooltipTemplate(e.currentTarget);
+    fetchData(e.currentTarget);
   });
 }
 
@@ -18,19 +18,20 @@ function handleMouseLeave(element) {
   });
 }
 
-function tooltipTemplate(element) {
-  fetchData();
+function tooltipTemplate(element, text) {
   element.insertAdjacentHTML('beforeend', `
     <div class="awesome-tooltip top">
-      <div class="awesome-tooltip-text">${element.dataset.awesomeTooltip}</div>
+      <div class="awesome-tooltip-text">${text}</div>
     </div>
   `);
 }
 
-function fetchData() {
-  fetch('http://localhost:3000/awesome_tooltip/hello_world.json')
-    .then(function(response) { return response.json(); })
-    .then(function(data) { console.log(JSON.stringify(data)['html']) });
+async function fetchData(element) {
+  await fetch('http://localhost:3001/awesome_tooltip/hello_world')
+    .then(function(response) { return response.text() })
+    .then(function(text) {
+      tooltipTemplate(element, text);
+    });
 }
 
 document.addEventListener(loadType, function() {
