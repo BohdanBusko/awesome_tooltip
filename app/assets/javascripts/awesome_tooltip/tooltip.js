@@ -8,13 +8,17 @@ if(typeof(Turbolinks) !== undefined) {
 
 function handleMouseEnter(element) {
   element.addEventListener('mouseenter', function(e) {
-    fetchData(e.currentTarget);
+    if(e.currentTarget.dataset.template)
+      fetchData(e.currentTarget);
   });
 }
 
 function handleMouseLeave(element) {
   element.addEventListener('mouseleave', function(e){
-    document.querySelector(`.${e.currentTarget.className} .awesome-tooltip`).remove();
+    var tooltip = document.querySelector(`.${e.currentTarget.className} .awesome-tooltip`);
+
+    if(tooltip)
+      tooltip.remove();
   });
 }
 
@@ -27,7 +31,10 @@ function tooltipTemplate(element, text) {
 }
 
 async function fetchData(element) {
-  await fetch('http://localhost:3001/awesome_tooltip/hello_world')
+  var url = window.location.href;
+  var object = element.dataset.object ? element.dataset.object : null;
+
+  await fetch(`${url}awesome_tooltip/tooltip/${element.dataset.template}/${object}`)
     .then(function(response) { return response.text() })
     .then(function(text) {
       tooltipTemplate(element, text);
