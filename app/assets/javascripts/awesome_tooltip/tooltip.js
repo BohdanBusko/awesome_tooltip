@@ -1,4 +1,5 @@
-var loadType = '';
+var loadType;
+var timerId;
 
 if(typeof(Turbolinks) !== undefined) {
   loadType = 'turbolinks:load';
@@ -8,26 +9,35 @@ if(typeof(Turbolinks) !== undefined) {
 
 function handleMouseEnter(element) {
   element.addEventListener('mouseenter', function(e) {
-    if(e.currentTarget.dataset.template)
+    clearTimeout(timerId);
+    if(e.currentTarget.dataset.template && !e.currentTarget.querySelector('.awesome-tooltip'))
       fetchData(e.currentTarget);
   });
 }
 
 function handleMouseLeave(element) {
   element.addEventListener('mouseleave', function(e){
-    var tooltip = document.querySelector(`.${e.currentTarget.className} .awesome-tooltip`);
+    var tooltip = e.currentTarget.querySelector(`.${e.currentTarget.className} .awesome-tooltip`);
 
-    if(tooltip)
-      tooltip.remove();
+    timerId = setTimeout(function() {
+      if(tooltip)
+        tooltip.remove();
+    }, 500);
   });
 }
 
 function tooltipTemplate(element, text) {
   element.insertAdjacentHTML('beforeend', `
-    <div class="awesome-tooltip top">
+    <div class="awesome-tooltip ${element.dataset.location}">
       <div class="awesome-tooltip-text">${text}</div>
     </div>
   `);
+}
+
+function tooltipLocation(place) {
+  switch(place) {
+
+  }
 }
 
 async function fetchData(element) {
