@@ -1,0 +1,2 @@
+class Tooltip < ApplicationRecord
+end

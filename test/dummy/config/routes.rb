@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'home#index'
+  resources :projects
+  root to: 'projects#index'
+  get '/tooltip', to: 'home#index', as: :home
 end

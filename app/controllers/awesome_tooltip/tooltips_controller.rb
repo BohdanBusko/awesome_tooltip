@@ -1,10 +1,19 @@
 class AwesomeTooltip::TooltipsController < ApplicationController
   def show
-    if params[:object]
-      splited_object = params[:object].split('-')
-      object = splited_object.first.classify.constantize.find(splited_object.last) if params[:object]
-    end
+    render(file: Rails.root.join('app', 'awesome_tooltips', params[:template]), locals: { object: record })
+  end
 
-    render(file: Rails.root.join('app', 'awesome_tooltip', params[:template]), locals: { object: object })
+  private
+
+  def attrs
+    params[:object].split('-')
+  end
+
+  def model
+    attrs[0].classify.constantize
+  end
+
+  def record
+    model.find(attrs[1])
   end
 end

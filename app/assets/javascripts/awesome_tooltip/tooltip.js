@@ -28,16 +28,10 @@ function handleMouseLeave(element) {
 
 function tooltipTemplate(element, text) {
   element.insertAdjacentHTML('beforeend', `
-    <div class="awesome-tooltip ${element.dataset.location}">
+    <div class="awesome-tooltip top">
       <div class="awesome-tooltip-text">${text}</div>
     </div>
   `);
-}
-
-function tooltipLocation(place) {
-  switch(place) {
-
-  }
 }
 
 async function fetchData(element) {
