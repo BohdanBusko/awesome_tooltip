@@ -35,10 +35,10 @@ function tooltipTemplate(element, text) {
 }
 
 async function fetchData(element) {
-  var url = window.location.href;
+  var url = window.location.origin;
   var object = element.dataset.object ? element.dataset.object : null;
 
-  await fetch(`${url}awesome_tooltip/tooltip/${element.dataset.template}/${object}`)
+  await fetch(`${url}/tooltip/${element.dataset.template}/${object}`)
     .then(function(response) { return response.text() })
     .then(function(text) {
       tooltipTemplate(element, text);

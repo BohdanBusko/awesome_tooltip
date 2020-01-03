@@ -1,5 +1,5 @@
 AwesomeTooltip::Engine.routes do
-  get '/awesome_tooltip/tooltip/:template/(:object)' => 'tooltips#show', as: :tooltip
+  get '/tooltip/:template/(:object)' => 'tooltips#show', as: :tooltip
 end
 
 Rails.application.routes.draw do
