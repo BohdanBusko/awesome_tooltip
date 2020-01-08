@@ -29,7 +29,9 @@ function handleMouseLeave(element) {
 function tooltipTemplate(element, text) {
   element.insertAdjacentHTML('beforeend', `
     <div class="awesome-tooltip top">
-      <div class="awesome-tooltip-text">${text}</div>
+      <div class="content-wrapper">
+        <div class="awesome-tooltip-text">${text}</div>
+      </div>
     </div>
   `);
 }

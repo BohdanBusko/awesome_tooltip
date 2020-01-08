@@ -1,33 +1,34 @@
-<p id="notice"><%= notice %></p>
+<% content_for :projects_active, 'active' %>
 
-<h1>Projects</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @projects.each do |project| %>
+<section class="projects">
+  <p id="notice"><%= notice %></p>
+  <br />
+  <div class="actions">
+    <%= link_to 'New Project', new_project_path %>
+  </div>
+  <table>
+    <thead>
       <tr>
-        <td><%= project.name %></td>
-        <td><%= project.description %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>ID</th>
+        <th class="name">Name</th>
+        <th>Description</th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
-
-<%= link_to 'New Project', new_project_path %>
-
-<br/>
-
-<%= link_to 'Tooltips', home_path %>
+    <tbody>
+      <% @projects.each do |project| %>
+        <tr>
+          <td><%= project.id %></td>
+          <td><%= project.name %></td>
+          <td><%= project.description %></td>
+          <td class="actions">
+            <%= link_to icon('fas', 'pencil-alt'), edit_project_path(project) %>
+            &nbsp;
+            <%= link_to icon('fas', 'trash'), project_path(project), method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>

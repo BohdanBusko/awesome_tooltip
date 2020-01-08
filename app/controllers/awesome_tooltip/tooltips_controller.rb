@@ -1,6 +1,6 @@
 class AwesomeTooltip::TooltipsController < ApplicationController
   def show
-    render(file: Rails.root.join('app', 'awesome_tooltips', params[:template]), locals: { object: record })
+    render(file: Rails.root.join('app', 'awesome_tooltips', params[:template]), locals: { object: record }, layout: false)
   end
 
   private

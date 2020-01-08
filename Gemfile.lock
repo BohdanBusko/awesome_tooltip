@@ -69,6 +69,8 @@ GEM
     crass (1.0.5)
     erubi (1.9.0)
     ffi (1.11.3)
+    font-awesome-sass (5.12.0)
+      sassc (>= 1.11)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.7.0)
@@ -157,6 +159,7 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_tooltip!
+  font-awesome-sass
   pry
   sqlite3
   turbolinks

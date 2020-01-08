@@ -1,0 +1,9 @@
+<header>
+  <div class="title">
+    AWESOME_TOOLTIP
+  </div>
+  <ul class="navigation">
+    <li><%= link_to 'Projects', root_path, class: yield(:projects_active) %></li>
+    <li><%= link_to 'Tooltips', tooltips_path, class: yield(:tooltips_active) %></li>
+  </ul>
+</header>

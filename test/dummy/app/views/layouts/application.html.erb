@@ -7,9 +7,11 @@
 
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
   </head>
 
   <body>
+    <%= render 'shared/header' %>
     <%= yield %>
   </body>
 </html>
