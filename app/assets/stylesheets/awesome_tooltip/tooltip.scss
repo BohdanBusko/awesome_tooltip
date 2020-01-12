@@ -4,9 +4,52 @@
   .awesome-tooltip {
     position: absolute;
 
+    &.hidden {
+      display: none;
+    }
+
     &.top {
       bottom: calc(100% + 15px);
-      left: -50%;
+
+      .content-wrapper:before {
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 10px solid #fff;
+        top: 100%;
+      }
+    }
+
+    &.bottom {
+      top: calc(100% + 15px);
+
+      .content-wrapper:before {
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid #fff;
+        bottom: 100%;
+      }
+    }
+
+    &.left {
+      right: calc(100% + 15px);
+
+      .content-wrapper:before {
+        border-bottom: 10px solid transparent;
+        border-top: 10px solid transparent;
+        border-left: 10px solid #fff;
+        left: 100%;
+      }
+    }
+
+    &.right {
+      left: calc(100% + 15px);
+
+      .content-wrapper:before {
+        border-bottom: 10px solid transparent;
+        border-top: 10px solid transparent;
+        border-right: 10px solid #fff;
+        right: 100%;
+      }
     }
 
     .content-wrapper {
@@ -20,11 +63,6 @@
         position: absolute;
         width: 0;
         height: 0;
-        border-left: 10px solid transparent;
-        border-right: 10px solid transparent;
-        border-top: 10px solid #fff;
-        top: 100%;
-        left: calc(50% - 10px);
         z-index: 3;
       }
     }

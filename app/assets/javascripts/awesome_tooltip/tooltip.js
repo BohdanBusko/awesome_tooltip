@@ -27,8 +27,10 @@ function handleMouseLeave(element) {
 }
 
 function tooltipTemplate(element, text) {
+  var elementLocation = element.dataset.location;
+
   element.insertAdjacentHTML('beforeend', `
-    <div class="awesome-tooltip top">
+    <div class="awesome-tooltip ${elementLocation}" style="left: -50%;">
       <div class="content-wrapper">
         <div class="awesome-tooltip-text">${text}</div>
       </div>
