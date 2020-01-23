@@ -22,7 +22,7 @@ function handleMouseLeave(element) {
     timerId = setTimeout(function() {
       if(tooltip)
         tooltip.remove();
-    }, 500);
+    }, 111500);
   });
 }
 
@@ -30,12 +30,47 @@ function tooltipTemplate(element, text) {
   var elementLocation = element.dataset.location;
 
   element.insertAdjacentHTML('beforeend', `
-    <div class="awesome-tooltip ${elementLocation}" style="left: -50%;">
+    <div class="awesome-tooltip ${elementLocation}">
       <div class="content-wrapper">
         <div class="awesome-tooltip-text">${text}</div>
+        <div class="triangle">
       </div>
     </div>
   `);
+
+  var tooltip         = element.querySelector('.awesome-tooltip');
+  var tooltipTriangle = tooltip.querySelector('.content-wrapper .triangle');
+
+  switch(elementLocation) {
+  case 'top':
+    var leftEnoughSpace  = tooltip.offsetWidth / 2 < element.getBoundingClientRect().right;
+    var rightEnoughSpace = tooltip.offsetWidth < document.body.offsetWidth - element.getBoundingClientRect().left;
+    var topEnoughSpace   = tooltip.offsetHeight < document.body.offsetHeight - element.getBoundingClientRect().top;
+
+    if(leftEnoughSpace && rightEnoughSpace && topEnoughSpace) {
+      tooltip.style.cssText = `left: ${(element.getBoundingClientRect().width / 2) - (tooltip.getBoundingClientRect().width / 2)}px;`;
+      tooltipTriangle.style.cssText = `left: calc(50% - ${tooltipTriangle.offsetWidth / 2}px);`;
+      break;
+    }
+
+    if(!leftEnoughSpace || !rightEnoughSpace) {
+      if(document.body.offsetWidth / 2 < element.getBoundingClientRect().left) {
+        tooltip.style.cssText = `right: -${document.body.offsetWidth - element.getBoundingClientRect().right}px;`;
+        tooltipTriangle.style.cssText = `right: ${document.body.offsetWidth - element.getBoundingClientRect().right + tooltipTriangle.offsetWidth + tooltipTriangle.offsetWidth / 2}px;`;
+      } else {
+        tooltip.style.cssText = `right: -${tooltip.offsetWidth - element.getBoundingClientRect().right}px;`;
+        tooltipTriangle.style.cssText = `right: ${tooltip.offsetWidth - element.getBoundingClientRect().right + tooltipTriangle.offsetWidth + tooltipTriangle.offsetWidth / 2}px;`;
+      }
+    } else {
+
+    }
+
+    if(!topEnoughSpace) {
+      tooltip.classList.remove('top', 'bottom');
+      tooltip.classList.add('bottom');
+      tooltipTriangle.style.cssText = `left: calc(50% - ${tooltipTriangle.offsetWidth / 2}px);`;
+    }
+  }
 }
 
 async function fetchData(element) {

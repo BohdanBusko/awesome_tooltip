@@ -21,7 +21,7 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
 
     if @project.save
-      redirect_to projects_path
+      redirect_to root_path
     else
       render :new
     end
@@ -30,7 +30,7 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   def update
     if @project.update(project_params)
-      redirect_to projects_path
+      redirect_to root_path
     else
       render :edit
     end

@@ -11,7 +11,7 @@
     &.top {
       bottom: calc(100% + 15px);
 
-      .content-wrapper:before {
+      .content-wrapper .triangle {
         border-left: 10px solid transparent;
         border-right: 10px solid transparent;
         border-top: 10px solid #fff;
@@ -22,7 +22,7 @@
     &.bottom {
       top: calc(100% + 15px);
 
-      .content-wrapper:before {
+      .content-wrapper .triangle {
         border-left: 10px solid transparent;
         border-right: 10px solid transparent;
         border-bottom: 10px solid #fff;
@@ -33,7 +33,7 @@
     &.left {
       right: calc(100% + 15px);
 
-      .content-wrapper:before {
+      .content-wrapper .triangle {
         border-bottom: 10px solid transparent;
         border-top: 10px solid transparent;
         border-left: 10px solid #fff;
@@ -44,7 +44,7 @@
     &.right {
       left: calc(100% + 15px);
 
-      .content-wrapper:before {
+      .content-wrapper .triangle {
         border-bottom: 10px solid transparent;
         border-top: 10px solid transparent;
         border-right: 10px solid #fff;
@@ -58,8 +58,7 @@
       padding: 5px 10px;
       border-radius: 5px;
 
-      &:before {
-        content: '';
+      .triangle {
         position: absolute;
         width: 0;
         height: 0;
