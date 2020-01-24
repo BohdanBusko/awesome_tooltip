@@ -22,7 +22,7 @@ function handleMouseLeave(element) {
     timerId = setTimeout(function() {
       if(tooltip)
         tooltip.remove();
-    }, 111500);
+    }, 1500);
   });
 }
 
@@ -43,14 +43,40 @@ function tooltipTemplate(element, text) {
 
   switch(elementLocation) {
   case 'top':
-    var leftEnoughSpace  = tooltip.offsetWidth / 2 < element.getBoundingClientRect().right;
-    var rightEnoughSpace = tooltip.offsetWidth < document.body.offsetWidth - element.getBoundingClientRect().left;
-    var topEnoughSpace   = tooltip.offsetHeight < document.body.offsetHeight - element.getBoundingClientRect().top;
+  case 'bottom':
+    var leftEnoughSpace   = tooltip.offsetWidth / 2 < element.getBoundingClientRect().right;
+    var rightEnoughSpace  = tooltip.offsetWidth < document.body.offsetWidth - element.getBoundingClientRect().left;
+    var topEnoughSpace    = tooltip.offsetHeight < element.getBoundingClientRect().top - 10;
+    var bottomEnoughSpace = tooltip.offsetHeight < window.outerHeight - element.getBoundingClientRect().bottom + 10;
 
-    if(leftEnoughSpace && rightEnoughSpace && topEnoughSpace) {
+    if(leftEnoughSpace && rightEnoughSpace && topEnoughSpace && bottomEnoughSpace) {
       tooltip.style.cssText = `left: ${(element.getBoundingClientRect().width / 2) - (tooltip.getBoundingClientRect().width / 2)}px;`;
       tooltipTriangle.style.cssText = `left: calc(50% - ${tooltipTriangle.offsetWidth / 2}px);`;
       break;
+    }
+
+    if(!topEnoughSpace && leftEnoughSpace && rightEnoughSpace) {
+      tooltip.classList.remove('top', 'bottom');
+      tooltip.classList.add('bottom');
+      tooltip.style.cssText = `left: ${(element.getBoundingClientRect().width / 2) - (tooltip.getBoundingClientRect().width / 2)}px;`;
+      tooltipTriangle.style.cssText = `left: calc(50% - ${tooltipTriangle.offsetWidth / 2}px);`;
+    }
+
+    if(!bottomEnoughSpace && leftEnoughSpace && rightEnoughSpace) {
+      tooltip.classList.remove('top', 'bottom');
+      tooltip.classList.add('top');
+      tooltip.style.cssText = `left: ${(element.getBoundingClientRect().width / 2) - (tooltip.getBoundingClientRect().width / 2)}px;`;
+      tooltipTriangle.style.cssText = `left: calc(50% - ${tooltipTriangle.offsetWidth / 2}px);`;
+    }
+
+    if(!topEnoughSpace) {
+      tooltip.classList.remove('top', 'bottom');
+      tooltip.classList.add('bottom');
+    }
+
+    if(!bottomEnoughSpace) {
+      tooltip.classList.remove('top', 'bottom');
+      tooltip.classList.add('top');
     }
 
     if(!leftEnoughSpace || !rightEnoughSpace) {
@@ -61,14 +87,6 @@ function tooltipTemplate(element, text) {
         tooltip.style.cssText = `right: -${tooltip.offsetWidth - element.getBoundingClientRect().right}px;`;
         tooltipTriangle.style.cssText = `right: ${tooltip.offsetWidth - element.getBoundingClientRect().right + tooltipTriangle.offsetWidth + tooltipTriangle.offsetWidth / 2}px;`;
       }
-    } else {
-
-    }
-
-    if(!topEnoughSpace) {
-      tooltip.classList.remove('top', 'bottom');
-      tooltip.classList.add('bottom');
-      tooltipTriangle.style.cssText = `left: calc(50% - ${tooltipTriangle.offsetWidth / 2}px);`;
     }
   }
 }
