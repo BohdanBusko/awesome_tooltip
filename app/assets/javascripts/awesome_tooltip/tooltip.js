@@ -81,10 +81,10 @@ function tooltipTemplate(element, text) {
 
     if(!leftEnoughSpace || !rightEnoughSpace) {
       if(document.body.offsetWidth / 2 < element.getBoundingClientRect().left) {
-        tooltip.style.cssText = `right: -${document.body.offsetWidth - element.getBoundingClientRect().right}px;`;
+        tooltip.style.cssText = `right: -${document.body.offsetWidth - element.getBoundingClientRect().left}px;`;
         tooltipTriangle.style.cssText = `right: ${document.body.offsetWidth - element.getBoundingClientRect().right + tooltipTriangle.offsetWidth + tooltipTriangle.offsetWidth / 2}px;`;
       } else {
-        tooltip.style.cssText = `right: -${tooltip.offsetWidth - element.getBoundingClientRect().right}px;`;
+        tooltip.style.cssText = `right: -${tooltip.offsetWidth - element.getBoundingClientRect().left}px;`;
         tooltipTriangle.style.cssText = `right: ${tooltip.offsetWidth - element.getBoundingClientRect().right + tooltipTriangle.offsetWidth + tooltipTriangle.offsetWidth / 2}px;`;
       }
     }
