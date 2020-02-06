@@ -46,8 +46,8 @@ function tooltipTemplate(element, text) {
   case 'bottom':
     var leftEnoughSpace   = tooltip.offsetWidth / 2 < element.getBoundingClientRect().right;
     var rightEnoughSpace  = tooltip.offsetWidth < document.body.offsetWidth - element.getBoundingClientRect().left;
-    var topEnoughSpace    = tooltip.offsetHeight < element.getBoundingClientRect().top - 10;
-    var bottomEnoughSpace = tooltip.offsetHeight < window.outerHeight - element.getBoundingClientRect().bottom + 10;
+    var topEnoughSpace    = tooltip.offsetHeight < element.getBoundingClientRect().top;
+    var bottomEnoughSpace = tooltip.offsetHeight < window.outerHeight - element.getBoundingClientRect().bottom;
 
     if(leftEnoughSpace && rightEnoughSpace && topEnoughSpace && bottomEnoughSpace) {
       tooltip.style.cssText = `left: ${(element.getBoundingClientRect().width / 2) - (tooltip.getBoundingClientRect().width / 2)}px;`;
@@ -84,7 +84,7 @@ function tooltipTemplate(element, text) {
         tooltip.style.cssText = `right: -${document.body.offsetWidth - element.getBoundingClientRect().left}px;`;
         tooltipTriangle.style.cssText = `right: ${document.body.offsetWidth - element.getBoundingClientRect().right + tooltipTriangle.offsetWidth + tooltipTriangle.offsetWidth / 2}px;`;
       } else {
-        tooltip.style.cssText = `right: -${tooltip.offsetWidth - element.getBoundingClientRect().left}px;`;
+        tooltip.style.cssText = `right: -${tooltip.offsetWidth - element.getBoundingClientRect().right}px;`;
         tooltipTriangle.style.cssText = `right: ${tooltip.offsetWidth - element.getBoundingClientRect().right + tooltipTriangle.offsetWidth + tooltipTriangle.offsetWidth / 2}px;`;
       }
     }
