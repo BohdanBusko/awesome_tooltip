@@ -124,11 +124,12 @@ section.tooltips {
     display: flex;
     width: 100%;
     justify-content: flex-start;
-    margin-top: 600px;
-    margin-left: 50px;
+    margin-left: 1800px;
+    margin-top: 800px;
+  }
 
-    .project {
-      white-space: pre;
-    }
+  .project {
+    padding: 10px;
+    min-width: 200px;
   }
 }

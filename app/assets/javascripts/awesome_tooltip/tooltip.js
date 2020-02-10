@@ -26,28 +26,18 @@ function handleMouseLeave(element) {
   });
 }
 
-function tooltipTemplate(element, text) {
-  var elementLocation = element.dataset.location;
-
-  element.insertAdjacentHTML('beforeend', `
-    <div class="awesome-tooltip ${elementLocation}">
-      <div class="content-wrapper">
-        <div class="awesome-tooltip-text">${text}</div>
-        <div class="triangle">
-      </div>
-    </div>
-  `);
-
+function tooltipPosition(element) {
   var tooltip         = element.querySelector('.awesome-tooltip');
   var tooltipTriangle = tooltip.querySelector('.content-wrapper .triangle');
 
-  switch(elementLocation) {
+  var leftEnoughSpace   = tooltip.offsetWidth / 2 < element.getBoundingClientRect().left;
+  var rightEnoughSpace  = tooltip.offsetWidth / 2  < document.body.offsetWidth - element.getBoundingClientRect().right;
+  var topEnoughSpace    = tooltip.offsetHeight < element.getBoundingClientRect().top;
+  var bottomEnoughSpace = tooltip.offsetHeight < window.height - element.getBoundingClientRect().bottom;
+
+  switch(element.dataset.location) {
   case 'top':
   case 'bottom':
-    var leftEnoughSpace   = tooltip.offsetWidth / 2 < element.getBoundingClientRect().right;
-    var rightEnoughSpace  = tooltip.offsetWidth < document.body.offsetWidth - element.getBoundingClientRect().left;
-    var topEnoughSpace    = tooltip.offsetHeight < element.getBoundingClientRect().top;
-    var bottomEnoughSpace = tooltip.offsetHeight < window.outerHeight - element.getBoundingClientRect().bottom;
 
     if(leftEnoughSpace && rightEnoughSpace && topEnoughSpace && bottomEnoughSpace) {
       tooltip.style.cssText = `left: ${(element.getBoundingClientRect().width / 2) - (tooltip.getBoundingClientRect().width / 2)}px;`;
@@ -56,17 +46,13 @@ function tooltipTemplate(element, text) {
     }
 
     if(!topEnoughSpace && leftEnoughSpace && rightEnoughSpace) {
-      tooltip.classList.remove('top', 'bottom');
-      tooltip.classList.add('bottom');
-      tooltip.style.cssText = `left: ${(element.getBoundingClientRect().width / 2) - (tooltip.getBoundingClientRect().width / 2)}px;`;
-      tooltipTriangle.style.cssText = `left: calc(50% - ${tooltipTriangle.offsetWidth / 2}px);`;
+      display(tooltip, tooltipTriangle, 'bottom');
+      break;
     }
 
     if(!bottomEnoughSpace && leftEnoughSpace && rightEnoughSpace) {
-      tooltip.classList.remove('top', 'bottom');
-      tooltip.classList.add('top');
-      tooltip.style.cssText = `left: ${(element.getBoundingClientRect().width / 2) - (tooltip.getBoundingClientRect().width / 2)}px;`;
-      tooltipTriangle.style.cssText = `left: calc(50% - ${tooltipTriangle.offsetWidth / 2}px);`;
+      display(tooltip, tooltipTriangle, 'top');
+      break;
     }
 
     if(!topEnoughSpace) {
@@ -80,15 +66,41 @@ function tooltipTemplate(element, text) {
     }
 
     if(!leftEnoughSpace || !rightEnoughSpace) {
-      if(document.body.offsetWidth / 2 < element.getBoundingClientRect().left) {
+      if(window.width / 2 < element.getBoundingClientRect().right) {
         tooltip.style.cssText = `right: -${document.body.offsetWidth - element.getBoundingClientRect().left}px;`;
-        tooltipTriangle.style.cssText = `right: ${document.body.offsetWidth - element.getBoundingClientRect().right + tooltipTriangle.offsetWidth + tooltipTriangle.offsetWidth / 2}px;`;
       } else {
-        tooltip.style.cssText = `right: -${tooltip.offsetWidth - element.getBoundingClientRect().right}px;`;
-        tooltipTriangle.style.cssText = `right: ${tooltip.offsetWidth - element.getBoundingClientRect().right + tooltipTriangle.offsetWidth + tooltipTriangle.offsetWidth / 2}px;`;
+        tooltip.style.cssText = `right: -${document.body.offsetWidth - element.getBoundingClientRect().right}px;`;
       }
+
+      tooltipTriangle.style.cssText = `right: ${document.body.offsetWidth - element.getBoundingClientRect().right + tooltipTriangle.offsetWidth + tooltipTriangle.offsetWidth / 2}px;`;
     }
   }
+}
+
+displayTop() {
+
+}
+
+function display(tooltip, tooltipTriangle, location) {
+  tooltip.classList.remove('top', 'bottom');
+  tooltip.classList.add(location);
+  tooltip.style.cssText = `left: ${(element.getBoundingClientRect().width / 2) - (tooltip.getBoundingClientRect().width / 2)}px;`;
+  tooltipTriangle.style.cssText = `left: calc(50% - ${tooltipTriangle.offsetWidth / 2}px);`;
+}
+
+function tooltipTemplate(element, text) {
+  var elementLocation = element.dataset.location;
+
+  element.insertAdjacentHTML('beforeend', `
+    <div class="awesome-tooltip ${elementLocation}">
+      <div class="content-wrapper">
+        <div class="awesome-tooltip-text">${text}</div>
+        <div class="triangle">
+      </div>
+    </div>
+  `);
+
+  tooltipPosition(element);
 }
 
 async function fetchData(element) {
