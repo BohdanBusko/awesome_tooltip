@@ -1,19 +1,5 @@
-require "awesome_tooltip/railtie"
+require 'awesome_tooltip/railtie'
+require 'awesome_tooltip/engine'
 
 module AwesomeTooltip
-  class << self
-    def load!
-      register_rails_engine
-    end
-
-    private
-
-    def register_rails_engine
-      require 'awesome_tooltip/engine'
-    end
-  end
 end
-
-require 'awesome_tooltip/routes'
-
-AwesomeTooltip.load!
