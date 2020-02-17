@@ -1,33 +1,33 @@
 (function (W, D) {
-	var loadType;
-	var timerId;
+  var loadType;
+  var timerId;
 
-	if(typeof(Turbolinks) !== undefined) {
-		loadType = 'turbolinks:load';
-	} else {
-		loadType = 'DOMContentLoaded';
-	}
+  if(typeof(Turbolinks) !== undefined) {
+    loadType = 'turbolinks:load';
+  } else {
+    loadType = 'DOMContentLoaded';
+  }
 
-	function handleMouseEnter(element) {
-		element.addEventListener('mouseenter', function(e) {
-			clearTimeout(timerId);
+  function handleMouseEnter(element) {
+    element.addEventListener('mouseenter', function(e) {
+      clearTimeout(timerId);
 
-			if(e.currentTarget.getAttribute('data-template') && !e.currentTarget.querySelector('.awesome-tooltip')) {
-				fetchData(e.currentTarget);
-			}
-		});
-	}
+      if(e.currentTarget.getAttribute('data-template') && !e.currentTarget.querySelector('.awesome-tooltip')) {
+        fetchData(e.currentTarget);
+      }
+    });
+  }
 
-	function handleMouseLeave(element) {
-		element.addEventListener('mouseleave', function(e){
-			var tooltip = e.currentTarget.querySelector('.' + e.currentTarget.className + ' .awesome-tooltip');
+  function handleMouseLeave(element) {
+    element.addEventListener('mouseleave', function(e){
+      var tooltip = e.currentTarget.querySelector('.' + e.currentTarget.className + ' .awesome-tooltip');
 
-			timerId = setTimeout(function() {
-				if(tooltip)
-					tooltip.remove();
-			}, 1500);
-		});
-	}
+      timerId = setTimeout(function() {
+        if(tooltip)
+          tooltip.remove();
+      }, 1500);
+    });
+  }
 
   function tooltipPosition(element) {
     var tooltip         = element.querySelector('.awesome-tooltip');
@@ -113,14 +113,14 @@
     req.send();
   }
 
-	D.addEventListener(loadType, function() {
-		var tooltips = document.querySelectorAll('[data-awesome-tooltip]');
+  D.addEventListener(loadType, function() {
+    var tooltips = document.querySelectorAll('[data-awesome-tooltip]');
 
-		tooltips.forEach(function(element) {
-			element.classList.add('awesome-tooltip-wrapper');
+    tooltips.forEach(function(element) {
+      element.classList.add('awesome-tooltip-wrapper');
 
-			handleMouseEnter(element);
-			handleMouseLeave(element);
-		});
-	});
+      handleMouseEnter(element);
+      handleMouseLeave(element);
+    });
+  });
 })(window, document)
