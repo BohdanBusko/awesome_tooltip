@@ -26,5 +26,13 @@ RSpec.describe AwesomeTooltip::TooltipsController, type: :controller do
       expect(response).to be_successful
       expect(response).to render_template('project')
     end
+
+    it 'does not render template when it is located outside of awesome_tooltips and views paths' do
+      expect do
+        get :show, params: {
+          template: '../testtemplate'
+        }
+      end.to raise_error(ActionView::MissingTemplate)
+    end
   end
 end
