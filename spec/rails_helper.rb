@@ -1,6 +1,9 @@
 require 'spec_helper'
+require 'simplecov'
 
 ENV['RAILS_ENV'] ||= 'test'
+
+SimpleCov.start
 
 require File.expand_path('./dummy/config/environment', __dir__)
 
