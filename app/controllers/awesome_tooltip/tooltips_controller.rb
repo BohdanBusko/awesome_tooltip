@@ -16,6 +16,6 @@ class AwesomeTooltip::TooltipsController < ApplicationController
   end
 
   def record
-    model.find(attrs[1])
+    model.find(attrs[1]) if params[:object].present?
   end
 end

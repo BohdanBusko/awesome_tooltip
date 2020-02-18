@@ -32,4 +32,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "turbolinks"
   spec.add_development_dependency "pry"
   spec.add_development_dependency "font-awesome-sass"
+  spec.add_development_dependency "rspec-rails"
 end
