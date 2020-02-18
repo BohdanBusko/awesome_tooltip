@@ -1,6 +1,7 @@
 (function (W, D) {
   var loadType;
   var timerId;
+  var config;
 
   if(typeof(Turbolinks) !== undefined) {
     loadType = 'turbolinks:load';
@@ -32,15 +33,16 @@
   function tooltipPosition(element) {
     var tooltip         = element.querySelector('.awesome-tooltip');
     var tooltipTriangle = tooltip.querySelector('.content-wrapper .triangle');
+    var elementRects    = element.getClientRects()[0];
 
-    var leftEnoughSpace   = tooltip.offsetWidth / 2 < element.getBoundingClientRect().left;
-    var rightEnoughSpace  = tooltip.offsetWidth / 2  < document.body.offsetWidth - element.getBoundingClientRect().right;
-    var bottomEnoughSpace = tooltip.offsetHeight < window.height - element.getBoundingClientRect().bottom;
-    var topEnoughSpace = tooltip.offsetHeight < element.getBoundingClientRect().top;
+    var leftEnoughSpace   = tooltip.offsetWidth / 2 < elementRects.left;
+    var rightEnoughSpace  = tooltip.offsetWidth / 2  < D.body.offsetWidth - elementRects.right;
+    var bottomEnoughSpace = tooltip.offsetHeight < W.height - elementRects.bottom;
+    var topEnoughSpace    = tooltip.offsetHeight < elementRects.top;
 
 
     if(leftEnoughSpace && rightEnoughSpace && topEnoughSpace && bottomEnoughSpace) {
-      tooltip.style.cssText = 'left: ' + ((element.getBoundingClientRect().width / 2) - (tooltip.getBoundingClientRect().width / 2)) + 'px;';
+      tooltip.style.cssText = 'left: ' + ((elementRects.width / 2) - (tooltip.getClientRects()[0].width / 2)) + 'px;';
       tooltipTriangle.style.cssText = 'left: calc(50% - ' + (tooltipTriangle.offsetWidth / 2) + 'px);';
       return;
     }
@@ -59,20 +61,18 @@
       }
 
       if(!topEnoughSpace) {
-        tooltip.classList.remove('top', 'bottom');
-        tooltip.classList.add('bottom');
+        toggleLocation(tooltip, 'bottom');
       } else if(!bottomEnoughSpace) {
-        tooltip.classList.remove('top', 'bottom');
-        tooltip.classList.add('top');
+        toggleLocation(tooltip, 'top');
       }
 
       if(!leftEnoughSpace || !rightEnoughSpace) {
-        if(window.innerWidth / 2 > element.getBoundingClientRect().right) {
-          tooltip.style.cssText = 'left: -' + (element.getBoundingClientRect().right - element.getBoundingClientRect().left) + 'px;';
-          tooltipTriangle.style.cssText = 'left: ' + (element.getBoundingClientRect().right - element.getBoundingClientRect().left + tooltipTriangle.offsetWidth + tooltipTriangle.offsetWidth / 2) + 'px;';
+        if(W.innerWidth / 2 > elementRects.right) {
+          tooltip.style.cssText = 'left: -' + (elementRects.right - elementRects.left) + 'px;';
+          tooltipTriangle.style.cssText = 'left: ' + (elementRects.right - elementRects.left + tooltipTriangle.offsetWidth + tooltipTriangle.offsetWidth / 2) + 'px;';
         } else {
-          tooltip.style.cssText = 'right: -' + (document.body.offsetWidth - element.getBoundingClientRect().right) + 'px;';
-          tooltipTriangle.style.cssText = 'right: ' + (document.body.offsetWidth - element.getBoundingClientRect().right + tooltipTriangle.offsetWidth + tooltipTriangle.offsetWidth / 2) + 'px;';
+          tooltip.style.cssText = 'right: -' + (D.body.offsetWidth - elementRects.right) + 'px;';
+          tooltipTriangle.style.cssText = 'right: ' + (D.body.offsetWidth - elementRects.right + tooltipTriangle.offsetWidth + tooltipTriangle.offsetWidth / 2) + 'px;';
         }
       }
     }
@@ -80,10 +80,16 @@
 
   function display(element, tooltipTriangle, location) {
     var tooltip = element.querySelector('.awesome-tooltip');
-    tooltip.classList.remove('top', 'bottom');
-    tooltip.classList.add(location);
-    tooltip.style.cssText = 'left: ' + ((element.getBoundingClientRect().width / 2) - (tooltip.getBoundingClientRect().width / 2)) + 'px;';
+
+    toggleLocation(element, location);
+    tooltip.style.cssText = 'left: ' + ((elementRects.width / 2) - (tooltip.getClientRects()[0].width / 2)) + 'px;';
     tooltipTriangle.style.cssText = 'left: calc(50% - ' + (tooltipTriangle.offsetWidth / 2) + 'px);';
+  }
+
+  function toggleLocation(element, location) {
+    element.className.replace(/top|bottom|left|right/gi, '').trim();
+    element.className += ' ' + location;
+    element.className.trim();
   }
 
   function tooltipTemplate(element, text) {
@@ -102,11 +108,12 @@
   }
 
   function fetchData(element) {
-    var url = window.location.origin;
+    var url = W.location.origin;
     var object = element.getAttribute('data-object') || '';
+    var tooltipPath = config.tooltipPath || '/tooltip/';
 
     var req = new XMLHttpRequest();
-    req.open('GET', url + '/tooltip/' + element.getAttribute('data-template') + '/' + object);
+    req.open('GET', url + tooltipPath + element.getAttribute('data-template') + '/' + object);
     req.onload = function() {
       tooltipTemplate(element, req.response);
     }
@@ -114,13 +121,17 @@
   }
 
   D.addEventListener(loadType, function() {
-    var tooltips = document.querySelectorAll('[data-awesome-tooltip]');
+    var tooltips = D.querySelectorAll('[data-awesome-tooltip]');
 
     tooltips.forEach(function(element) {
-      element.classList.add('awesome-tooltip-wrapper');
+      element.className += element.className.length < 1 ? 'awesome-tooltip-wrapper' : ' awesome-tooltip-wrapper';
 
       handleMouseEnter(element);
       handleMouseLeave(element);
     });
   });
+
+  W.AwesomeTooltip = function(conf) {
+    config = conf || {};
+  }
 })(window, document)
