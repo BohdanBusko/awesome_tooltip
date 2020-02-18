@@ -3,7 +3,8 @@
   var timerId;
   var config = {
     tooltipPath: '/tooltip/',
-    delay: 1500
+    delay: 1500,
+    location: 'top'
   };
 
   if(typeof(Turbolinks) !== undefined) {
@@ -50,7 +51,7 @@
       return;
     }
 
-    switch(element.getAttribute('data-location')) {
+    switch(element.getAttribute('data-location') || config.location) {
     case 'top':
     case 'bottom':
       if(!topEnoughSpace && leftEnoughSpace && rightEnoughSpace) {
@@ -96,7 +97,7 @@
   }
 
   function tooltipTemplate(element, text) {
-    var elementLocation = element.getAttribute('data-location');
+    var elementLocation = element.getAttribute('data-location') || config.location;
 
     element.insertAdjacentHTML('beforeend',
       '<div class="awesome-tooltip ' + elementLocation + '">' +
