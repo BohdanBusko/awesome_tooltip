@@ -1,4 +1,6 @@
 # AwesomeTooltip
+[![Build Status](https://travis-ci.com/BogdanBusko/awesome_tooltip.svg?branch=master)](https://travis-ci.com/BogdanBusko/awesome_tooltip)
+
 Short description and motivation.
 
 ## Usage
