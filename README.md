@@ -1,4 +1,5 @@
 # AwesomeTooltip
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9834e1a71378405ca922f38a439e460d)](https://app.codacy.com/manual/BogdanBusko/awesome_tooltip?utm_source=github.com&utm_medium=referral&utm_content=BogdanBusko/awesome_tooltip&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.com/BogdanBusko/awesome_tooltip.svg?branch=master)](https://travis-ci.com/BogdanBusko/awesome_tooltip)
 
 Short description and motivation.
