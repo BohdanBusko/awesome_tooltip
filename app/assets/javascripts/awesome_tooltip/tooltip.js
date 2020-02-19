@@ -125,7 +125,7 @@
   }
 
   D.addEventListener(loadType, function() {
-    var tooltips = D.querySelectorAll("[data-awesome-tooltip]");
+    var tooltips = D.querySelectorAll(".awesome_tooltip");
 
     tooltips.forEach(function(element) {
       element.className += element.className.length < 1 ? "awesome-tooltip-wrapper" : " awesome-tooltip-wrapper";
