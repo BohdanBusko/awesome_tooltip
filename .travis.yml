@@ -1,6 +1,6 @@
 env:
   global:
-    - CC_TEST_REPORTER_ID=6d4f7c0efaddd1a9ce09b3e6b1f491a8801dc2c21c1f46c333553033256c0f57
+    - CC_TEST_REPORTER_ID=53d40fe6f47334e072c8cbd2b5d4a3e78066d5d36dc7283cff43c6479b45e156
 language: ruby
 rvm:
   - 2.6.3
