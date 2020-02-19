@@ -64,8 +64,6 @@ GEM
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2)
     builder (3.2.4)
-    codacy-coverage (2.2.1)
-      simplecov
     coderay (1.1.2)
     concurrent-ruby (1.1.6)
     crass (1.0.6)
@@ -195,7 +193,6 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_tooltip!
-  codacy-coverage
   factory_bot_rails
   faker
   font-awesome-sass
