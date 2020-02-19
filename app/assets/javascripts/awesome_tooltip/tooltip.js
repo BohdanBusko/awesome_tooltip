@@ -91,7 +91,7 @@
   }
 
   function toggleLocation(element, location) {
-    element.className.replace(/top|bottom|left|right/gi, "").trim();
+    element.className = element.className.replace(/top|bottom|left|right/gi, "").trim();
     element.className += " " + location;
     element.className.trim();
   }
