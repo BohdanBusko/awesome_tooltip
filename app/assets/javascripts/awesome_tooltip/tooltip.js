@@ -42,7 +42,7 @@
     var leftEnoughSpace   = tooltip.offsetWidth / 2 + element.offsetWidth / 2 < elementRects.left;
     var rightEnoughSpace  = tooltip.offsetWidth / 2  < D.body.offsetWidth - elementRects.right;
     var bottomEnoughSpace = tooltip.offsetHeight < W.outerHeight - elementRects.bottom;
-    var topEnoughSpace    = tooltip.offsetHeight < elementRects.top;
+    var topEnoughSpace    = tooltip.offsetHeight + tooltipTriangle.offsetHeight < elementRects.top;
 
     if(leftEnoughSpace && rightEnoughSpace && topEnoughSpace && bottomEnoughSpace) {
       tooltip.style.cssText = "left: " + ((elementRects.width / 2) - (tooltip.getClientRects()[0].width / 2)) + "px;";
