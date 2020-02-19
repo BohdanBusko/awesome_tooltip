@@ -72,8 +72,8 @@
 
       if(!leftEnoughSpace || !rightEnoughSpace) {
         if(W.innerWidth / 2 > elementRects.right) {
-          tooltip.style.cssText = "left: -" + (elementRects.right - elementRects.left) + "px;";
-          tooltipTriangle.style.cssText = "left: " + (elementRects.right - elementRects.left + tooltipTriangle.offsetWidth + tooltipTriangle.offsetWidth / 2) + "px;";
+          tooltip.style.cssText = "left: " + (elementRects.right - element.offsetWidth) + "px;";
+          tooltipTriangle.style.cssText = "left: " + (elementRects.right - element.offsetWidth + tooltipTriangle.offsetWidth + tooltipTriangle.offsetWidth / 2) + "px;";
         } else {
           tooltip.style.cssText = "right: -" + (D.body.offsetWidth - elementRects.right) + "px;";
           tooltipTriangle.style.cssText = "right: " + (D.body.offsetWidth - elementRects.right + tooltipTriangle.offsetWidth + tooltipTriangle.offsetWidth / 2) + "px;";
