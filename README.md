@@ -1,7 +1,6 @@
 # AwesomeTooltip
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9834e1a71378405ca922f38a439e460d)](https://app.codacy.com/manual/BogdanBusko/awesome_tooltip?utm_source=github.com&utm_medium=referral&utm_content=BogdanBusko/awesome_tooltip&utm_campaign=Badge_Grade_Dashboard)
+[![Build Status](https://travis-ci.com/BogdanBusko/awesome_tooltip.svg?branch=master)](https://travis-ci.com/BogdanBusko/awesome_tooltip)
 [![Maintainability](https://api.codeclimate.com/v1/badges/13a8f6106b17b50e9943/maintainability)](https://codeclimate.com/github/BogdanBusko/awesome_tooltip/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/13a8f6106b17b50e9943/test_coverage)](https://codeclimate.com/github/BogdanBusko/awesome_tooltip/test_coverage)
 
 Short description and motivation.
 
