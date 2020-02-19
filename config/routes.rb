@@ -1,3 +1,3 @@
 AwesomeTooltip::Engine.routes do
-  get '/tooltip/:template/(:object)' => 'tooltips#show', as: :tooltip
+  get '/tooltip/:template/(:object)', to: 'tooltips#show'
 end
