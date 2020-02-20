@@ -21,32 +21,40 @@ Or install it yourself as:
 $ gem install awesome_tooltip
 ```
 
+## Configuration
+
+Mount AwesomeTooltip.routes in to your config/routes.rb
 ```ruby
 mount AwesomeTooltip::Engine => '/', as: 'awesome_tooltip'
 ```
-JS
+
+Require AwesomeTooltip javascript in to your application.js
 ```javascript
 //= require awesome_tooltip/tootlip
 ```
-CSS
+
+If you are using Rails 6 with webpack you must create folder javascripts with file application.js in your assets folder and require it there.
+
+Require AwesomeTooltip styles
 ```css
 /*
  *= require awesome_tooltip/tooltip
  */
 ```
 
-Create folder
+Create folder for you tooltip templates
 ```bash
 $ mkdir app/awesome_tooltips
 ```
 
-Create template
+And now just add template.
 ```bash
 $ touch app/awesome_tooltips/template.html.erb
 ```
 
 ## Usage
 
+To start using AwesomeTooltip add following attribute to element 
 ```html
 <div class="awesome_tooltip" data-template="template">Static template</div>
 ```
@@ -66,21 +74,7 @@ or
 | data-object | Model name and object id separated by dash | project-1 | true |
 | data-location | Tooltip location | bottom | true |
 
-## Configuration
-In JS
-```javascript
-AwesomeTooltip({
-  tooltipPath: '/your/custom/path/',
-  delay: 2000,
-  location: 'bottom'
-});
-```
 
-| Option | Default value | Type |
-|--------|---------------|------|
-| tooltipPath | /tooltip/ | String |
-| delay | 1500 | Integer |
-| location | top(also available bottom) | String | 
 
 
 ## Contributing
