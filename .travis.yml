@@ -1,11 +1,5 @@
-env:
-  global:
-    - CC_TEST_REPORTER_ID=53d40fe6f47334e072c8cbd2b5d4a3e78066d5d36dc7283cff43c6479b45e156
-
 language: ruby
 rvm:
   - 2.6.3
-bundler_args:
-  --without development --jobs=3 --retry=3 --path=../vendor/bundle
 script:
   - bundle exec rspec
