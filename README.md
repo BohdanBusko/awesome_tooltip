@@ -11,6 +11,11 @@ Add this line to your application's Gemfile:
 gem 'awesome_tooltip'
 ```
 
+And then execute:
+```bash
+$ bundle
+```
+
 ## Configuration
 
 1. Mount AwesomeTooltip routes in to your config/routes.rb
