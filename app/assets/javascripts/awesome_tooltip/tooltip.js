@@ -1,6 +1,7 @@
 (function (W, D) {
   var loadType;
-  var timerId;
+  var hideDelayTimeId;
+  var showDelayTimeId;
   var config = {
     tooltipPath: "/tooltip/",
     delay: 1500,
@@ -15,21 +16,26 @@
 
   function handleMouseEnter(element) {
     element.addEventListener("mouseenter", function(e) {
-      clearTimeout(timerId);
+      clearTimeout(hideDelayTimeId);
 
-      if(e.currentTarget.getAttribute("data-template") && !e.currentTarget.querySelector(".awesome-tooltip")) {
-        fetchData(e.currentTarget);
-      }
+      showDelayTimeId = setTimeout(function() {
+        if(e.currentTarget.getAttribute("data-template") && !e.currentTarget.querySelector(".awesome-tooltip")) {
+          fetchData(e.currentTarget);
+        }
+      }, 1000);
     });
   }
 
   function handleMouseLeave(element) {
     element.addEventListener("mouseleave", function(e){
+      clearTimeout(showDelayTimeId);
+
       var tooltip = e.currentTarget.querySelector("." + e.currentTarget.className.split(" ").join(".") + " .awesome-tooltip");
 
-      timerId = setTimeout(function() {
-        if(tooltip)
+      hideDelayTimeId = setTimeout(function() {
+        if(tooltip) {
           tooltip.remove();
+        }
       }, config.delay);
     });
   }
