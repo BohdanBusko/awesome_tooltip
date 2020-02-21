@@ -52,6 +52,21 @@ And now just add template.
 $ touch app/awesome_tooltips/template.html.erb
 ```
 
+Also you can update js configurations
+```javascript
+AwesomeTooltip({
+  tooltipPath: '/your/custom/path/',
+  delay: 2000,
+  location: 'bottom'
+});
+```
+
+| Option | Default value | Type |
+|--------|---------------|------|
+| tooltipPath | /tooltip/ | String |
+| delay | 1500 | Integer |
+| location | top(also available bottom) | String | 
+
 ## Usage
 
 To start using AwesomeTooltip add following attributes to HTML element 
