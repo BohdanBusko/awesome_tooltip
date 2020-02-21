@@ -64,7 +64,7 @@ AwesomeTooltip({
 | Option | Default value | Type |
 |--------|---------------|------|
 | tooltipPath | /tooltip/ | String |
-| delay | 1500 | Integer |
+| hideDelay | 1500 | Integer |
 | location | top(also available bottom) | String | 
 
 ## Usage
