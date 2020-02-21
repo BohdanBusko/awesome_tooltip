@@ -16,21 +16,24 @@
 
   function handleMouseEnter(element) {
     element.addEventListener("mouseenter", function(e) {
+      var element = e.currentTarget;
+
       clearTimeout(hideDelayTimeId);
 
       showDelayTimeId = setTimeout(function() {
-        if(e.currentTarget.getAttribute("data-template") && !e.currentTarget.querySelector(".awesome-tooltip")) {
-          fetchData(e.currentTarget);
+        if(element.getAttribute("data-template") && !element.querySelector(".awesome-tooltip")) {
+          fetchData(element);
         }
-      }, 1000);
+      }, 500);
     });
   }
 
   function handleMouseLeave(element) {
     element.addEventListener("mouseleave", function(e){
-      clearTimeout(showDelayTimeId);
+      var element = e.currentTarget;
+      var tooltip = element.querySelector("." + element.className.split(" ").join(".") + " .awesome-tooltip");
 
-      var tooltip = e.currentTarget.querySelector("." + e.currentTarget.className.split(" ").join(".") + " .awesome-tooltip");
+      clearTimeout(showDelayTimeId);
 
       hideDelayTimeId = setTimeout(function() {
         if(tooltip) {
@@ -45,10 +48,14 @@
     var tooltipTriangle = tooltip.querySelector(".content-wrapper .triangle");
     var elementRects    = element.getClientRects()[0];
 
-    var leftEnoughSpace   = tooltip.offsetWidth / 2 + element.offsetWidth / 2 < elementRects.left;
-    var rightEnoughSpace  = tooltip.offsetWidth / 2  < D.body.offsetWidth - elementRects.right;
-    var bottomEnoughSpace = tooltip.offsetHeight < W.outerHeight - elementRects.bottom;
-    var topEnoughSpace    = tooltip.offsetHeight + tooltipTriangle.offsetHeight < elementRects.top;
+    var tHeight = tooltip.offsetHeight;
+    var tWidth  = tooltip.offsetWidth;
+    var eWidth  = element.offsetWidth;
+
+    var leftEnoughSpace   = tWidth / 2 + eWidth / 2 < elementRects.left;
+    var rightEnoughSpace  = tWidth / 2  < D.body.offsetWidth - elementRects.right;
+    var bottomEnoughSpace = tHeight < W.outerHeight - elementRects.bottom;
+    var topEnoughSpace    = tHeight + tooltipTriangle.offsetHeight < elementRects.top;
 
     if(leftEnoughSpace && rightEnoughSpace && topEnoughSpace && bottomEnoughSpace) {
       tooltip.style.cssText = "left: " + ((elementRects.width / 2) - (tooltip.getClientRects()[0].width / 2)) + "px;";
@@ -77,8 +84,8 @@
 
       if(!leftEnoughSpace || !rightEnoughSpace) {
         if(W.innerWidth / 2 > elementRects.right) {
-          tooltip.style.cssText = "left: -" + (elementRects.right - element.offsetWidth) + "px;";
-          tooltipTriangle.style.cssText = "left: " + (elementRects.right - element.offsetWidth + tooltipTriangle.offsetWidth + tooltipTriangle.offsetWidth / 2) + "px;";
+          tooltip.style.cssText = "left: -" + (elementRects.right - eWidth) + "px;";
+          tooltipTriangle.style.cssText = "left: " + (elementRects.right - eWidth + tooltipTriangle.offsetWidth + tooltipTriangle.offsetWidth / 2) + "px;";
         } else {
           tooltip.style.cssText = "right: -" + (D.body.offsetWidth - elementRects.right) + "px;";
           tooltipTriangle.style.cssText = "right: " + (D.body.offsetWidth - elementRects.right + tooltipTriangle.offsetWidth + tooltipTriangle.offsetWidth / 2) + "px;";
