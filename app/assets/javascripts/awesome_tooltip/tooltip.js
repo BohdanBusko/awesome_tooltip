@@ -8,7 +8,7 @@
     location: "top"
   };
 
-  if(typeof(Turbolinks) !== undefined) {
+  if(typeof(Turbolinks) !== "undefined") {
     loadType = "turbolinks:load";
   } else {
     loadType = "DOMContentLoaded";
