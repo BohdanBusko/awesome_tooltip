@@ -40,7 +40,7 @@ $ mkdir app/awesome_tooltips
 $ echo '<h1>This is your tooltip with static template</h1>' > template.html.erb
 ```
 
-6. Add this on your page
+6. Add code below on your page
 ```html
 <div class="awesome_tooltip" data-template="template">Element with tooltip</div>
 ```
@@ -62,15 +62,29 @@ After that add code below on your page
 ```html
 <div class="awesome_tooltip" data-template="user_info" data-object="#{@user.class.downcase}-#{@user.id}"><%= @user.full_name %></div>
 ```
-**Available options**
+
+## Configuration
+**HTML attrobites**
 | Option | Description | Value example | Optional |
 |--------|-------------|---------------|----------|
 | **data-template** | Path to your template(root dir for template is app/awesome_tooltips) | project | false |
 | **data-object** | Model name and object id separated by dash | project-1 | true |
 | **data-location** | Tooltip location | bottom | true |
 
-Also you can update js configurations
+If you want to update some js configuration following code to your js file
+```javascript
+AwesomeTooltip({
+  tooltipPath: '/your/custom/path/',
+  delay: 2000,
+  location: 'bottom'
+});
+```
 
+| Option | Default value | Type |
+|--------|---------------|------|
+| **tooltipPath** | /tooltip/ | String |
+| **hideDelay** | 1500 | Integer |
+| **location** | top(also available bottom) | String | 
 
 ## TODO:
   - Add generators
