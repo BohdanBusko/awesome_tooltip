@@ -4,7 +4,7 @@
   var showDelayTimeId;
   var config = {
     tooltipPath: "/tooltip/",
-    delay: 1500,
+    hideDelay: 1500,
     location: "top"
   };
 
@@ -39,7 +39,7 @@
         if(tooltip) {
           tooltip.remove();
         }
-      }, config.delay);
+      }, config.hideDelay);
     });
   }
 
