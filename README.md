@@ -25,7 +25,7 @@ mount AwesomeTooltip::Engine => '/', as: 'awesome_tooltip'
 
 2. Require AwesomeTooltip javascript in to your application.js. If you are using Rails 6 with webpack you must create folder javascripts with file application.js in your assets folder and require javascript there.
 ```javascript
-//= require awesome_tooltip/tootlip
+//= require awesome_tooltip/tooltip
 ```
 
 3. Require AwesomeTooltip styles
