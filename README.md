@@ -70,7 +70,7 @@ Also you can use static templates
 | data-object | Model name and object id separated by dash | project-1 | true |
 | data-location | Tooltip location | bottom | true |
 
-# TODO:
+## TODO:
   - Add generators
   - Add configs
   - Add ability to place tooltip on the left and right side
