@@ -11,79 +11,66 @@ Add this line to your application's Gemfile:
 gem 'awesome_tooltip'
 ```
 
-And then execute:
-```bash
-$ bundle
-```
-
-Or install it yourself as:
-```bash
-$ gem install awesome_tooltip
-```
-
 ## Configuration
 
-Mount AwesomeTooltip routes in to your config/routes.rb
+1. Mount AwesomeTooltip routes in to your config/routes.rb
 ```ruby
 mount AwesomeTooltip::Engine => '/', as: 'awesome_tooltip'
 ```
 
-Require AwesomeTooltip javascript in to your application.js
+2. Require AwesomeTooltip javascript in to your application.js. If you are using Rails 6 with webpack you must create folder javascripts with file application.js in your assets folder and require javascript there.
 ```javascript
 //= require awesome_tooltip/tootlip
 ```
 
-If you are using Rails 6 with webpack you must create folder javascripts with file application.js in your assets folder and require javascript there.
-
-Require AwesomeTooltip styles
+3. Require AwesomeTooltip styles
 ```css
 /*
  *= require awesome_tooltip/tooltip
  */
 ```
 
-Create folder for you tooltip templates
+4. Create folder for you tooltip templates
 ```bash
 $ mkdir app/awesome_tooltips
 ```
 
-And now just add template.
+5. Add template.
 ```bash
-$ touch app/awesome_tooltips/template.html.erb
+$ echo '<h1>This is your tooltip with static template</h1>' > template.html.erb
 ```
 
-Also you can update js configurations
-```javascript
-AwesomeTooltip({
-  tooltipPath: '/your/custom/path/',
-  delay: 2000,
-  location: 'bottom'
-});
+6. Add this on your page
+```html
+<div class="awesome_tooltip" data-template="template">Element with tooltip</div>
 ```
-
-| Option | Default value | Type |
-|--------|---------------|------|
-| tooltipPath | /tooltip/ | String |
-| hideDelay | 1500 | Integer |
-| location | top(also available bottom) | String | 
 
 ## Usage
-
-To start using AwesomeTooltip add following attributes to HTML element 
+For example if you want tooltip with some external info for user you can create tooltip template with this info in folder app/awesome_tooltips/user_info.html.erb
 ```html
-<div class="awesome_tooltip" 
-     data-template="user_template"
-     data-object="user-1"
-     data-location="bottom">John Doe</div>
+<div class="user-info">
+  <div class="user-fullname">
+    <%= @user.full_name %>
+  </div>
+  <div class="email">
+    <%= @user.email %>
+  </div>
+</div>
+``` 
+
+After that add code below on your page
+```html
+<div class="awesome_tooltip" data-template="user_info" data-object="#{@user.class.downcase}-#{@user.id}"><%= @user.full_name %></div>
 ```
-
-Also you can use static templates
-
+**Available options**
 | Option | Description | Value example | Optional |
 |--------|-------------|---------------|----------|
-| data-template | Path to your template(root dir for template is app/awesome_tooltips) | project | false |
-| data-object | Model name and object id separated by dash | project-1 | true |
-| data-location | Tooltip location | bottom | true |
+| **data-template** | Path to your template(root dir for template is app/awesome_tooltips) | project | false |
+| **data-object** | Model name and object id separated by dash | project-1 | true |
+| **data-location** | Tooltip location | bottom | true |
+
+Also you can update js configurations
+
 
 ## TODO:
   - Add generators
