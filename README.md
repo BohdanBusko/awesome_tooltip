@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.com/BogdanBusko/awesome_tooltip.svg?branch=master)](https://travis-ci.com/BogdanBusko/awesome_tooltip)
 [![Maintainability](https://api.codeclimate.com/v1/badges/13a8f6106b17b50e9943/maintainability)](https://codeclimate.com/github/BogdanBusko/awesome_tooltip/maintainability)
 
-TODO: Add description
+Lightwere get for loading tooltips on your page without preloading this data on page. With this gem you can load static template and templates with data from database.
 
 ## Installation
 Add this line to your application's Gemfile:
@@ -56,8 +56,13 @@ $ touch app/awesome_tooltips/template.html.erb
 
 To start using AwesomeTooltip add following attributes to HTML element 
 ```html
-<div class="awesome_tooltip" data-template="template">Static template</div>
+<div class="awesome_tooltip" 
+     data-template="user_template"
+     data-object="user-1"
+     data-loacation="bottom">John Doe</div>
 ```
+
+Also you can use static templates
 
 | Option | Description | Value example | Optional |
 |--------|-------------|---------------|----------|
@@ -65,8 +70,10 @@ To start using AwesomeTooltip add following attributes to HTML element
 | data-object | Model name and object id separated by dash | project-1 | true |
 | data-location | Tooltip location | bottom | true |
 
-
-
+# TODO:
+  - Add generators
+  - Add configs
+  - Add ability to place tooltip on the left and right side
 
 ## Contributing
 Contribution directions go here.
