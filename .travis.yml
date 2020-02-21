@@ -2,4 +2,5 @@ language: ruby
 rvm:
   - 2.6.3
 script:
+  - bundle config set deployment 'true'
   - bundle exec rspec
