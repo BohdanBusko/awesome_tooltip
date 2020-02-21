@@ -64,7 +64,7 @@ After that add code below on your page
 ```
 
 ## Configuration
-**HTML attrobites**
+**HTML attributes**
 | Option | Description | Value example | Optional |
 |--------|-------------|---------------|----------|
 | **data-template** | Path to your template(root dir for template is app/awesome_tooltips) | project | false |
