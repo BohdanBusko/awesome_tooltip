@@ -2,10 +2,10 @@
 [![Build Status](https://travis-ci.com/BogdanBusko/awesome_tooltip.svg?branch=master)](https://travis-ci.com/BogdanBusko/awesome_tooltip)
 [![Maintainability](https://api.codeclimate.com/v1/badges/13a8f6106b17b50e9943/maintainability)](https://codeclimate.com/github/BogdanBusko/awesome_tooltip/maintainability)
 
-Lightwer get for loading tooltips on your page without preloading this data on page. With this gem you can load static template and templates with data from database.
+Lightweight gem for loading tooltips on your page without preloading. With this gem you can load static template, or templates with data from the database.
 
 ## Installation
-Add this line to your application's Gemfile:
+Add this line to your applications' `Gemfile`:
 
 ```ruby
 gem 'awesome_tooltip'
@@ -18,40 +18,40 @@ $ bundle
 
 ## Configuration
 
-1. Mount AwesomeTooltip routes in to your config/routes.rb
+1. Mount AwesomeTooltip routes in to your `config/routes.rb`
 ```ruby
 mount AwesomeTooltip::Engine => '/', as: 'awesome_tooltip'
 ```
 
-2. Require AwesomeTooltip javascript in to your application.js. If you are using Rails 6 with webpack you must create folder javascripts with file application.js in your assets folder and require javascript there.
+2. Require AwesomeTooltip javascript in to your `application.js`. If you are using Rails 6 with webpack you must create `app/assets/javascripts` folder with `application.js` file and require javascript there.
 ```javascript
 //= require awesome_tooltip/tooltip
 ```
 
-3. Require AwesomeTooltip styles
+3. Require AwesomeTooltip styles:
 ```css
 /*
  *= require awesome_tooltip/tooltip
  */
 ```
 
-4. Create folder for you tooltip templates
+4. Create a folder for you tooltip templates:
 ```bash
 $ mkdir app/awesome_tooltips
 ```
 
-5. Add template.
+5. Add a template:
 ```bash
-$ echo '<h1>This is your tooltip with static template</h1>' > template.html.erb
+$ echo '<h1>This is your tooltip with static template</h1>' > app/awesome_tooltips/template.html.erb
 ```
 
-6. Add code below on your page
+6. Add following code to your page:
 ```html
 <div class="awesome_tooltip" data-template="template">Element with tooltip</div>
 ```
 
 ## Usage
-For example if you want tooltip with some external info for user you can create tooltip template with this info in folder app/awesome_tooltips/user_info.html.erb
+For example, if you want a tooltip with some external info for a user, you can create a tooltip template with the following info in `app/awesome_tooltips/user_info.html.erb` folder: 
 ```html
 <div class="user-info">
   <div class="user-fullname">
@@ -63,7 +63,7 @@ For example if you want tooltip with some external info for user you can create 
 </div>
 ``` 
 
-After that add code below on your page
+Then add the following code to your page:
 ```html
 <div class="awesome_tooltip" data-template="user_info" data-object="#{@user.class.downcase}-#{@user.id}"><%= @user.full_name %></div>
 ```
@@ -76,7 +76,7 @@ After that add code below on your page
 | **data-object** | Model name and object id separated by dash | project-1 | true |
 | **data-location** | Tooltip location | bottom | true |
 
-If you want to update some js configuration following code to your js file
+If you want to override default javascript configuration, you can add the following code to you js file:
 ```javascript
 AwesomeTooltip({
   tooltipPath: '/your/custom/path/',
