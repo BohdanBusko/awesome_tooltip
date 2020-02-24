@@ -65,7 +65,7 @@ For example, if you want a tooltip with some external info for a user, you can c
 
 Then add the following code to your page:
 ```html
-<div class="awesome_tooltip" data-template="user_info" data-object="#{@user.class.downcase}-#{@user.id}"><%= @user.full_name %></div>
+<div class="awesome_tooltip" data-template="user_info" data-object="#{@user.class.name.downcase}-#{@user.id}"><%= @user.full_name %></div>
 ```
 
 ## Configuration
