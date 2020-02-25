@@ -1,4 +1,6 @@
 class AwesomeTooltip::TooltipsController < ApplicationController
+  include Rails.application.routes.url_helpers
+
   prepend_view_path(Rails.root.join('app', 'awesome_tooltips'))
 
   def show
