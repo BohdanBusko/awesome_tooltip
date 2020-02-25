@@ -9,3 +9,5 @@ spec/dummy/storage/
 spec/dummy/tmp/
 
 *.swp
+
+coverage/

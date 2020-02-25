@@ -97,7 +97,11 @@ AwesomeTooltip({
   - Add ability to place tooltip on the left and right side
 
 ## Contributing
-Contribution directions go here.
+- Fork it
+- Create your feature branch (git checkout -b my-new-feature)
+- Commit your changes (git commit -am 'Added some feature')
+- Push to the branch (git push origin my-new-feature)
+- Create new Pull Request
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
