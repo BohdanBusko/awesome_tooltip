@@ -4,7 +4,7 @@
 
 Lightweight gem for loading tooltips on your page without preloading. With this gem you can load static template, or templates with data from the database.
 
-[<img src="./preview.gif" />]
+![]('preview.gif')
 
 ## Installation
 Add this line to your applications' `Gemfile`:
