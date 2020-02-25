@@ -1,11 +1,11 @@
 .awesome-tooltip-wrapper {
   position: relative;
-  display: inline-block;
   cursor: pointer;
 
   .awesome-tooltip {
     position: absolute;
     background-color: #fff;
+    cursor: auto;
 
     &.hidden {
       display: none;
