@@ -5,7 +5,7 @@
   var config = {
     tooltipPath: "/tooltip/",
     hideDelay: 1500,
-    location: "top"
+    location: "at-top"
   };
 
   if(typeof(Turbolinks) !== "undefined") {
@@ -66,22 +66,22 @@
     }
 
     switch(element.getAttribute("data-location") || config.location) {
-    case "top":
-    case "bottom":
+    case "at-top":
+    case "at-bottom":
       if(!topEnoughSpace && leftEnoughSpace && rightEnoughSpace) {
-        display(element, tooltipTriangle, "bottom");
+        display(element, tooltipTriangle, "at-bottom");
         break;
       }
 
       if(!bottomEnoughSpace && leftEnoughSpace && rightEnoughSpace) {
-        display(element, tooltipTriangle, "top");
+        display(element, tooltipTriangle, "at-top");
         break;
       }
 
       if(!topEnoughSpace) {
-        toggleLocation(tooltip, "bottom");
+        toggleLocation(tooltip, "at-bottom");
       } else if(!bottomEnoughSpace) {
-        toggleLocation(tooltip, "top");
+        toggleLocation(tooltip, "at-top");
       }
 
       if(!leftEnoughSpace || !rightEnoughSpace) {
@@ -105,7 +105,7 @@
   }
 
   function toggleLocation(element, location) {
-    element.className = element.className.replace(/top|bottom|left|right/gi, "").trim();
+    element.className = element.className.replace(/at-top|at-bottom|at-left|at-right/gi, "").trim();
     element.className += " " + location;
     element.className.trim();
   }
