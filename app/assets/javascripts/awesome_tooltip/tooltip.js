@@ -1,7 +1,7 @@
 (function (W, D) {
   var loadType;
-  var hideDelayTimeId;
-  var showDelayTimeId;
+  var hideDelayTimerId = {};
+  var showDelayTimerId = {};
   var config = {
     tooltipPath: "/tooltip/",
     hideDelay: 1500,
@@ -17,10 +17,11 @@
   function handleMouseEnter(element) {
     element.addEventListener("mouseenter", function(e) {
       var element = e.currentTarget;
+      var elementIndex = element.getAttribute('data-index');
 
-      clearTimeout(hideDelayTimeId);
+      clearTimeout(hideDelayTimerId[elementIndex]);
 
-      showDelayTimeId = setTimeout(function() {
+      showDelayTimerId[elementIndex] = setTimeout(function() {
         if(element.getAttribute("data-template") && !element.querySelector(".awesome-tooltip")) {
           fetchData(element);
         }
@@ -31,11 +32,12 @@
   function handleMouseLeave(element) {
     element.addEventListener("mouseleave", function(e){
       var element = e.currentTarget;
+      var elementIndex = element.getAttribute('data-index');
       var tooltip = element.querySelector("." + element.className.split(" ").join(".") + " .awesome-tooltip");
 
-      clearTimeout(showDelayTimeId);
+      clearTimeout(showDelayTimerId[elementIndex]);
 
-      hideDelayTimeId = setTimeout(function() {
+      hideDelayTimerId[elementIndex] = setTimeout(function() {
         if(tooltip) {
           tooltip.remove();
         }
@@ -139,8 +141,9 @@
   D.addEventListener(loadType, function() {
     var tooltips = D.querySelectorAll(".awesome_tooltip");
 
-    tooltips.forEach(function(element) {
+    tooltips.forEach(function(element, index) {
       element.className += element.className.length < 1 ? "awesome-tooltip-wrapper" : " awesome-tooltip-wrapper";
+      element.setAttribute('data-index', 'awesome-tooltip' + index);
 
       handleMouseEnter(element);
       handleMouseLeave(element);
