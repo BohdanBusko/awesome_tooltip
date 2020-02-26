@@ -11,7 +11,7 @@
       display: none;
     }
 
-    &.as-top {
+    &.at-top {
       bottom: calc(100% + 10px);
 
       .content-wrapper .triangle {
@@ -22,7 +22,7 @@
       }
     }
 
-    &.as-bottom {
+    &.at-bottom {
       top: calc(100% + 10px);
 
       .content-wrapper .triangle {
@@ -33,7 +33,7 @@
       }
     }
 
-    &.as-left {
+    &.at-left {
       right: calc(100% + 10px);
 
       .content-wrapper .triangle {
@@ -44,7 +44,7 @@
       }
     }
 
-    &.as-right {
+    &.at-right {
       left: calc(100% + 10px);
 
       .content-wrapper .triangle {
