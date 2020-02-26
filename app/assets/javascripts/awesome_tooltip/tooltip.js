@@ -17,7 +17,7 @@
   function handleMouseEnter(element) {
     element.addEventListener("mouseenter", function(e) {
       var element = e.currentTarget;
-      var elementIndex = element.getAttribute('data-index');
+      var elementIndex = element.getAttribute("data-index");
 
       clearTimeout(hideDelayTimerId[elementIndex]);
 
@@ -32,7 +32,7 @@
   function handleMouseLeave(element) {
     element.addEventListener("mouseleave", function(e){
       var element = e.currentTarget;
-      var elementIndex = element.getAttribute('data-index');
+      var elementIndex = element.getAttribute("data-index");
       var tooltip = element.querySelector("." + element.className.split(" ").join(".") + " .awesome-tooltip");
 
       clearTimeout(showDelayTimerId[elementIndex]);
@@ -59,13 +59,15 @@
     var bottomEnoughSpace = tHeight < W.outerHeight - elementRects.bottom;
     var topEnoughSpace    = tHeight + tooltipTriangle.offsetHeight < elementRects.top;
 
+    var location = element.getAttribute("data-location") ? "at-" + element.getAttribute("data-location") : "at-" + config.location;
+
     if(leftEnoughSpace && rightEnoughSpace && topEnoughSpace && bottomEnoughSpace) {
       tooltip.style.cssText = "left: " + ((elementRects.width / 2) - (tooltip.getClientRects()[0].width / 2)) + "px;";
       tooltipTriangle.style.cssText = "left: calc(50% - " + (tooltipTriangle.offsetWidth / 2) + "px);";
       return;
     }
 
-    switch('at-' + element.getAttribute("data-location") || 'at-' + config.location) {
+    switch(location) {
     case "at-top":
     case "at-bottom":
       if(!topEnoughSpace && leftEnoughSpace && rightEnoughSpace) {
@@ -106,12 +108,12 @@
 
   function toggleLocation(element, location) {
     element.className = element.className.replace(/at-top|at-bottom|at-left|at-right/gi, "").trim();
-    element.className += " " + 'at-' + location;
+    element.className += " " + "at-" + location;
     element.className.trim();
   }
 
   function tooltipTemplate(element, text) {
-    var elementLocation = element.getAttribute("data-location") || 'at-' + config.location;
+    var elementLocation = element.getAttribute("data-location") || "at-" + config.location;
 
     element.insertAdjacentHTML("beforeend",
       "<div class=\"awesome-tooltip " + elementLocation + "\">" +
@@ -143,7 +145,7 @@
 
     tooltips.forEach(function(element, index) {
       element.className += element.className.length < 1 ? "awesome-tooltip-wrapper" : " awesome-tooltip-wrapper";
-      element.setAttribute('data-index', 'awesome-tooltip' + index);
+      element.setAttribute("data-index", "awesome-tooltip" + index);
 
       handleMouseEnter(element);
       handleMouseLeave(element);
