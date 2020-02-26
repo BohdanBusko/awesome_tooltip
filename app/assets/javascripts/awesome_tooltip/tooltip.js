@@ -5,7 +5,7 @@
   var config = {
     tooltipPath: "/tooltip/",
     hideDelay: 1500,
-    location: "at-top"
+    location: "top"
   };
 
   if(typeof(Turbolinks) !== "undefined") {
@@ -65,23 +65,23 @@
       return;
     }
 
-    switch(element.getAttribute("data-location") || config.location) {
+    switch('at-' + element.getAttribute("data-location") || 'at-' + config.location) {
     case "at-top":
     case "at-bottom":
       if(!topEnoughSpace && leftEnoughSpace && rightEnoughSpace) {
-        display(element, tooltipTriangle, "at-bottom");
+        display(element, tooltipTriangle, "bottom");
         break;
       }
 
       if(!bottomEnoughSpace && leftEnoughSpace && rightEnoughSpace) {
-        display(element, tooltipTriangle, "at-top");
+        display(element, tooltipTriangle, "top");
         break;
       }
 
       if(!topEnoughSpace) {
-        toggleLocation(tooltip, "at-bottom");
+        toggleLocation(tooltip, "bottom");
       } else if(!bottomEnoughSpace) {
-        toggleLocation(tooltip, "at-top");
+        toggleLocation(tooltip, "top");
       }
 
       if(!leftEnoughSpace || !rightEnoughSpace) {
@@ -106,12 +106,12 @@
 
   function toggleLocation(element, location) {
     element.className = element.className.replace(/at-top|at-bottom|at-left|at-right/gi, "").trim();
-    element.className += " " + location;
+    element.className += " " + 'at-' + location;
     element.className.trim();
   }
 
   function tooltipTemplate(element, text) {
-    var elementLocation = element.getAttribute("data-location") || config.location;
+    var elementLocation = element.getAttribute("data-location") || 'at-' + config.location;
 
     element.insertAdjacentHTML("beforeend",
       "<div class=\"awesome-tooltip " + elementLocation + "\">" +
