@@ -53,9 +53,10 @@
     var tHeight = tooltip.offsetHeight;
     var tWidth  = tooltip.offsetWidth;
     var eWidth  = element.offsetWidth;
+    var bodyWidth = D.body.offsetWidth;
 
     var leftEnoughSpace   = tWidth / 2 + eWidth / 2 < elementRects.left;
-    var rightEnoughSpace  = tWidth / 2  < D.body.offsetWidth - elementRects.right;
+    var rightEnoughSpace  = tWidth / 2  < bodyWidth - elementRects.right;
     var bottomEnoughSpace = tHeight < W.outerHeight - elementRects.bottom;
     var topEnoughSpace    = tHeight + tooltipTriangle.offsetHeight < elementRects.top;
 
@@ -91,8 +92,8 @@
           tooltip.style.cssText = "left: -" + (elementRects.right - eWidth) + "px;";
           tooltipTriangle.style.cssText = "left: " + (elementRects.right - eWidth + tooltipTriangle.offsetWidth + tooltipTriangle.offsetWidth / 2) + "px;";
         } else {
-          tooltip.style.cssText = "right: -" + (D.body.offsetWidth - elementRects.right) + "px;";
-          tooltipTriangle.style.cssText = "right: " + (D.body.offsetWidth - elementRects.right + tooltipTriangle.offsetWidth + tooltipTriangle.offsetWidth / 2) + "px;";
+          tooltip.style.cssText = "right: -" + (bodyWidth - elementRects.right) + "px;";
+          tooltipTriangle.style.cssText = "right: " + (bodyWidth - elementRects.right + tooltipTriangle.offsetWidth + tooltipTriangle.offsetWidth / 2) + "px;";
         }
       }
     }
