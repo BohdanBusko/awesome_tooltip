@@ -114,7 +114,7 @@
   }
 
   function tooltipTemplate(element, text) {
-    var elementLocation = element.getAttribute("data-location") || "at-" + config.location;
+    var elementLocation = "at-" + element.getAttribute("data-location") || "at-" + config.location;
 
     element.insertAdjacentHTML("beforeend",
       "<div class=\"awesome-tooltip " + elementLocation + "\">" +
