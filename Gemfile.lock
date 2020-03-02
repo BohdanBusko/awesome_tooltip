@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    awesome_tooltip (0.1.14)
+    awesome_tooltip (0.1.15)
       rails
       sass-rails
 
@@ -97,7 +97,7 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.14.0)
     nio4r (2.5.2)
-    nokogiri (1.10.8)
+    nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
     pry (0.12.2)
       coderay (~> 1.1.0)
@@ -163,10 +163,10 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    simplecov (0.18.2)
+    simplecov (0.18.5)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
-    simplecov-html (0.12.0)
+    simplecov-html (0.12.2)
     sprockets (4.0.0)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
