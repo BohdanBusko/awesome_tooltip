@@ -30,7 +30,7 @@ mount AwesomeTooltip::Engine => '/', as: 'awesome_tooltip'
 //= require awesome_tooltip/tooltip
 ```
 
-3. Require AwesomeTooltip styles:
+3. Require AwesomeTooltip styles in application.css:
 ```css
 /*
  *= require awesome_tooltip/tooltip
