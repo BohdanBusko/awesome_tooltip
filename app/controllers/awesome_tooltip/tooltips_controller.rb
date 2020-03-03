@@ -4,13 +4,14 @@ class AwesomeTooltip::TooltipsController < ApplicationController
   prepend_view_path(Rails.root.join('app', 'awesome_tooltips'))
 
   def show
-    render template: params[:template], locals: { model => record }, layout: false
+    locals = params[:object] ? { model => record } : {}
+    render template: params[:template], locals: locals, layout: false
   end
 
   private
 
   def attrs
-    params[:object]&.split('-')
+    params[:object].split('-')
   end
 
   def model
