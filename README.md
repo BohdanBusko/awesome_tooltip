@@ -57,10 +57,10 @@ For example, if you want a tooltip with some external info for a user, you can c
 ```html
 <div class="user-info">
   <div class="user-fullname">
-    <%= @user.full_name %>
+    <%= user.full_name %>
   </div>
   <div class="email">
-    <%= @user.email %>
+    <%= user.email %>
   </div>
 </div>
 ``` 
