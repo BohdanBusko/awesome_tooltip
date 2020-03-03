@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+git_source(:github) { |repo| 'https://github.com/#{repo}.git' }
 
 # Declare your gem's dependencies in awesome_tooltip.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
@@ -15,8 +15,9 @@ gemspec
 # gem 'byebug', group: [:development, :test]
 
 group :test do
-  gem "rails-controller-testing"
-  gem "factory_bot_rails"
-  gem "faker"
+  gem 'rails-controller-testing'
+  gem 'factory_bot_rails'
+  gem 'faker'
   gem 'simplecov', require: false
+  gem 'database_cleaner-active_record'
 end
