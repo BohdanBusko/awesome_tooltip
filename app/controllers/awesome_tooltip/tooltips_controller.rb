@@ -10,7 +10,7 @@ class AwesomeTooltip::TooltipsController < ApplicationController
   private
 
   def attrs
-    params[:object].split('-')
+    params[:object]&.split('-')
   end
 
   def model
