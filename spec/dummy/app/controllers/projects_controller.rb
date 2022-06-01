@@ -6,15 +6,13 @@ class ProjectsController < ApplicationController
     @projects = Project.all
   end
 
-
   # GET /projects/new
   def new
     @project = Project.new
   end
 
   # GET /projects/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /projects
   def create

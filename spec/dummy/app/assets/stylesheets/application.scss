@@ -1,6 +1,4 @@
 @import 'awesome_tooltip/tooltip';
-@import "font-awesome-sprockets";
-@import "font-awesome";
 
 body {
   margin: 0;
@@ -131,5 +129,14 @@ section.tooltips {
   .project {
     padding: 10px;
     min-width: 200px;
+  }
+
+  .lorem {
+    text-decoration: underline;
+  }
+
+  .lorem-text {
+    min-width: 200px;
+    max-width: 300px;
   }
 }

@@ -16,12 +16,15 @@ Gem::Specification.new do |spec|
 
   spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
-  spec.add_dependency "rails"
+  spec.required_ruby_version = '>= 2.2.2'
+
+  spec.add_dependency "rails", '>= 5.0.0'
   spec.add_dependency "sass-rails"
+  spec.add_dependency "jwt"
 
   spec.add_development_dependency "sqlite3"
-  spec.add_development_dependency "turbolinks"
-  spec.add_development_dependency "pry"
-  spec.add_development_dependency "font-awesome-sass"
+  spec.add_development_dependency "byebug"
   spec.add_development_dependency "rspec-rails"
+  spec.add_development_dependency "sprockets"
+  spec.add_development_dependency "puma"
 end

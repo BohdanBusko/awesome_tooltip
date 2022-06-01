@@ -1,24 +1,29 @@
-class AwesomeTooltip::TooltipsController < ApplicationController
-  include Rails.application.routes.url_helpers
-
-  prepend_view_path(Rails.root.join('app', 'awesome_tooltips'))
-
+class AwesomeTooltip::TooltipsController < AwesomeTooltip::ApplicationController
   def show
-    locals = params[:object] ? { model => record } : {}
-    render template: params[:template], locals: locals, layout: false
+    render partial: template, locals: locals, layout: false
   end
 
   private
 
-  def attrs
-    params[:object].split('-')
+  def data
+    @data ||= AwesomeTooltip::Tooltip.get_token_data(params[:token])
   end
 
-  def model
-    attrs[0].classify.constantize
+  def locals
+    return {} unless data[:object].present?
+
+    { object.to_s.downcase => resource }
   end
 
-  def record
-    model.find(attrs[1]) if params[:object].present?
+  def object
+    data[:object].classify.contsantize
+  end
+
+  def resource
+    object.find(data[:object_id])
+  end
+
+  def template
+    ['tooltips', data[:template]].join('/')
   end
 end

@@ -10,4 +10,6 @@ spec/dummy/tmp/
 
 *.swp
 
+.DS_Store
+
 coverage/
