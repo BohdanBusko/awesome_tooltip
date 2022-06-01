@@ -2,12 +2,12 @@
   var hideDelayTimerId = {};
   var config = {
     hideDelay: 1500,
-    location: "top",
-    loadType: "DOMContentLoaded",
-    tooltipPath: "/awesome_tooltip/tooltip"
+    location: "<%= AwesomeTooltip.config.location %>",
+    loadType: "<%= AwesomeTooltip.config.load_type %>",
+    tooltipPath: "<%= AwesomeTooltip.config.mount_point %>"
   };
 
-  // Moujkkkkj fsasdfasdfse handlers
+  // Mouse handlers
   function handleMouseEvent(element, event, callback = function() {}, delay) {
     element.addEventListener(event, function(e) {
       var element = e.currentTarget;
