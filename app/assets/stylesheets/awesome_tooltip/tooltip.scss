@@ -1,8 +1,9 @@
-.awesome-tooltip-wrapper {
+.awesome-tooltip {
   position: relative;
   cursor: pointer;
+  z-index: 4;
 
-  .awesome-tooltip {
+  .awesome-tooltip-content {
     position: absolute;
     background-color: #fff;
     cursor: auto;
@@ -30,6 +31,7 @@
         border-right: 10px solid transparent;
         border-bottom: 10px solid #fff;
         bottom: 100%;
+        left: calc(50% - 10px);
       }
     }
 
@@ -57,7 +59,7 @@
 
     .content-wrapper {
       position: relative;
-      box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
       padding: 5px 10px;
       border-radius: 5px;
 

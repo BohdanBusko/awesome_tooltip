@@ -1,0 +1,142 @@
+(function (W, D) {
+  var hideDelayTimerId = {};
+  var config = {
+    hideDelay: 1500,
+    location: "top",
+    loadType: "DOMContentLoaded",
+    tooltipPath: "/awesome_tooltip/tooltip"
+  };
+
+  // Moujkkkkj fsasdfasdfse handlers
+  function handleMouseEvent(element, event, callback = function() {}, delay) {
+    element.addEventListener(event, function(e) {
+      var element = e.currentTarget;
+      var tipId = tooltipId(element);
+
+      clearTimeout(hideDelayTimerId[tipId]);
+
+      hideDelayTimerId[tipId] = setTimeout(function() {
+        callback();
+      }, delay);
+    });
+  }
+  function handleMouseEnter(element) {
+    handleMouseEvent(element, "mouseenter", function() {
+      if(!tooltip(element)) {
+        fetchTooltipContent(element);
+      }
+    }, 500);
+  }
+
+  function handleMouseLeave(element) {
+    handleMouseEvent(element, "mouseleave", function() {
+      if(tooltip(element)) {
+        tooltip(element).remove();
+      }
+    }, config.hideDelay);
+  }
+  // Mose handlers
+
+  // Positioning
+  function tooltipPosition(element) {
+    var elementRects    = element.getClientRects()[0];
+    var location        = tooltipLocation(element);
+    var tooltipTriangle = tooltip(element).querySelector(".content-wrapper .triangle");
+
+    var tHeight = tooltip(element).offsetHeight;
+    var tWidth  = tooltip(element).offsetWidth;
+    var eWidth  = element.offsetWidth;
+    var bodyWidth = D.body.offsetWidth;
+
+    var leftEnoughSpace   = tWidth / 2 + eWidth / 2 < elementRects.left;
+    var rightEnoughSpace  = tWidth / 2  < bodyWidth - elementRects.right;
+    var bottomEnoughSpace = tHeight < W.outerHeight - elementRects.bottom;
+    var topEnoughSpace    = tHeight + tooltipTriangle.offsetHeight < elementRects.top;
+
+    display(element, location);
+
+    switch(true) {
+      case !topEnoughtSpace:
+        changeLocation(element, "bottom");
+      case !bottomEnoughSpace:
+        changeLocation(element, "top");
+    }
+  }
+
+  function display(element, location) {
+    var tip = tooltip(element);
+    var triangle = tooltipTriangle(tip);
+
+    tip.style.cssText = "left: " + (((element.getClientRects()[0].width / 2) - (tip.getClientRects()[0].width / 2)) / 2) + "px;";
+    triangle.style.cssText = "left: calc(50% - " + (triangle.offsetWidth / 2) + "px);";
+  }
+
+  function changeLocation(element, location) {
+    var tip = tooltip(element);
+
+    tip.className = tip.className.replace(/at-top|at-bottom|at-left|at-right/gi, "").trim();
+    tip.className += " " + "at-" + location;
+    tip.className.trim();
+  }
+  // Positioning
+
+  function tooltipTemplate(element, content) {
+    console.log(element);
+
+    var elementLocation = tooltipLocation(element) ? "at-" + tooltipLocation(element) : "at-" + config.location;
+
+    element.insertAdjacentHTML("beforeend",
+      "<div class=\"awesome-tooltip-content " + elementLocation + "\">" +
+        "<div class=\"content-wrapper\">" +
+          "<div class=\"awesome-tooltip-text\">" + content + "</div>" +
+          "<div class=\"triangle\">" +
+        "</div>" +
+      "</div>"
+    );
+
+    tooltipPosition(element);
+  }
+
+  function fetchTooltipContent(element) {
+    var url = W.location.origin;
+    var token = element.getAttribute("data-tooltip") || "";
+    var tooltipPath = config.tooltipPath;
+
+    if (token) {
+      var req = new XMLHttpRequest();
+
+      req.open("GET", url + tooltipPath + '?token=' + token);
+      req.onload = function() {
+        tooltipTemplate(element, req.response);
+      }
+      req.send();
+    }
+  }
+
+  // Coommon data
+  function tooltip(element) {
+    return element.querySelector(".awesome-tooltip-content");
+  }
+
+  function tooltipTriangle(tooltip) {
+    return tooltip.querySelector(".content-wrapper .triangle");
+  }
+
+  function tooltipId(element) {
+    return element.getAttribute("data-tooltip-id");
+  }
+
+  function tooltipLocation(element) {
+    return element.getAttribute("data-tooltip-location");
+  }
+  // Common data
+
+  D.addEventListener(config.loadType, function() {
+    var tooltips = D.querySelectorAll(".awesome-tooltip");
+
+    tooltips.forEach(function(element, index) {
+      handleMouseEnter(element);
+      handleMouseLeave(element);
+    });
+  }, { once: true });
+})(window, document);

@@ -2,18 +2,10 @@
 
 <section class="tooltips">
   <div class="container">
-    <div class="tooltip">
-      <span class="awesome_tooltip"
-            data-template="project"
-            data-object="project-1"
-      >
-        Some text
-      </span>
-    </div>
-    <span class="awesome_tooltip"
-          data-template="test_template"
-    >
-      Some text
-    </span>
+    <p>
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+      <%= tooltip(template: 'static_template', text: "Lorem Ipsum", classes: 'lorem', location: 'top') %> has been the industry's standard dummy text ever since the 1500s,
+      when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+    </p>
   </div>
 </section>
